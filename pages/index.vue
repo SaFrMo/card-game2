@@ -1,9 +1,7 @@
 <template>
-    <no-ssr>
-        <main :class="['home']">
-            <game-container />
-        </main>
-    </no-ssr>
+    <main :class="['home']">
+        <game-container />
+    </main>
 </template>
 
 <script>

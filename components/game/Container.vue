@@ -1,6 +1,7 @@
 <template>
     <section class="game-container" v-if="G">
         {{ G.deck }}
+        <!-- <button @click="client.moves.askForCard(3)">Ask</button> -->
     </section>
 </template>
 
@@ -13,6 +14,11 @@ export default {
     data() {
         return {
             options
+        }
+    },
+    methods: {
+        clientReady() {
+            this.client.moves.shuffleDeck()
         }
     }
 }

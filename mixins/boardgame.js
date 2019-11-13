@@ -16,7 +16,9 @@ export default {
         initClient() {
             this.client = new Client(this.options)
             this.client.start()
-        }
+            this.clientReady()
+        },
+        clientReady() {}
     },
     computed: {
         G() {
