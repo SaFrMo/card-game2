@@ -1,5 +1,5 @@
 <template>
-    <main class="home"></main>
+    <main class="home"><game-container /></main>
 </template>
 
 <script>
@@ -8,5 +8,7 @@ export default {}
 
 <style>
 .home {
+    margin: 60px;
+    text-align: center;
 }
 </style>
