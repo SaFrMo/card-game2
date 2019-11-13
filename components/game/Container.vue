@@ -1,7 +1,8 @@
 <template>
     <section class="game-container" v-if="G">
-        {{ G.deck }}
-        <!-- <button @click="client.moves.askForCard(3)">Ask</button> -->
+        <div class="hand-wrap">
+            <game-hand v-for="(hand, i) in G.hands" :key="i" :hand="hand" />
+        </div>
     </section>
 </template>
 
@@ -19,6 +20,10 @@ export default {
     methods: {
         clientReady() {
             this.client.moves.shuffleDeck()
+            this.client.moves.drawCards({ count: 5 })
+            this.client.events.endTurn()
+            this.client.moves.drawCards({ count: 5 })
+            this.client.events.endTurn()
         }
     }
 }
@@ -26,5 +31,9 @@ export default {
 
 <style lang="scss">
 .game-container {
+    .hand-wrap {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 </style>
