@@ -1,9 +1,21 @@
 <template>
-    <section class="game-container">Game</section>
+    <section class="game-container" v-if="G">
+        {{ G.deck }}
+    </section>
 </template>
 
 <script>
-export default {}
+import boardgame from '~/mixins/boardgame'
+import options from '~/lib/game'
+
+export default {
+    mixins: [boardgame],
+    data() {
+        return {
+            options
+        }
+    }
+}
 </script>
 
 <style lang="scss">
