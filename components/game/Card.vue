@@ -1,6 +1,9 @@
 <template>
     <div :class="['game-card', card.suit]">
-        {{ card.value }} of {{ card.suit }}
+        {{ card.rank }} of {{ card.suit }}
+        <button @click="$emit('ask', card.rank)">
+            Ask for {{ card.rank }}s
+        </button>
     </div>
 </template>
 

@@ -1,7 +1,12 @@
 <template>
     <section class="game-container" v-if="G">
         <div class="hand-wrap">
-            <game-hand v-for="(hand, i) in G.hands" :key="i" :hand="hand" />
+            <game-hand
+                v-for="(hand, i) in G.hands"
+                :key="i"
+                :hand="hand"
+                @ask="onAsk"
+            />
         </div>
     </section>
 </template>
@@ -24,6 +29,10 @@ export default {
             this.client.events.endTurn()
             this.client.moves.drawCards({ count: 5 })
             this.client.events.endTurn()
+        },
+        onAsk(val) {
+            const otherPlayerIndex = this.ctx.currentPlayer == 0 ? 1 : 0
+            this.client.moves.askForCard({ rank: val, otherPlayerIndex })
         }
     }
 }

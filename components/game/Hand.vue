@@ -2,7 +2,7 @@
     <section class="hand">
         <ul>
             <li v-for="(card, i) in hand" :key="i">
-                <game-card :card="card" />
+                <game-card :card="card" @ask="$emit('ask', $event)" />
             </li>
         </ul>
     </section>
