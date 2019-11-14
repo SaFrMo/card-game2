@@ -5,7 +5,7 @@
                 v-for="(hand, i) in G.hands"
                 :key="i"
                 :hand="hand"
-                @ask="onAsk"
+                @ask="onAsk($event, i)"
             />
         </div>
     </section>
@@ -13,6 +13,7 @@
 
 <script>
 import boardgame from '~/mixins/boardgame'
+import * as core from 'boardgame.io/core'
 import options from '~/lib/game'
 
 export default {
@@ -24,15 +25,19 @@ export default {
     },
     methods: {
         clientReady() {
-            this.client.moves.shuffleDeck()
-            this.client.moves.drawCards({ count: 5 })
-            this.client.events.endTurn()
-            this.client.moves.drawCards({ count: 5 })
-            this.client.events.endTurn()
+            // this.client.moves.shuffleDeck()
+            // this.client.moves.drawCards({ count: 5 })
+            // this.client.events.endTurn()
+            // this.client.moves.drawCards({ count: 5 })
+            // this.client.events.endTurn()
         },
-        onAsk(val) {
-            const otherPlayerIndex = this.ctx.currentPlayer == 0 ? 1 : 0
-            this.client.moves.askForCard({ rank: val, otherPlayerIndex })
+        onAsk(rank, askerIndex) {
+            const otherPlayerIndex = askerIndex == 0 ? 1 : 0
+            this.client.moves.askForCard({
+                rank,
+                otherPlayerIndex,
+                askerIndex
+            })
         }
     }
 }
