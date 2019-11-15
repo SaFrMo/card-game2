@@ -28,13 +28,6 @@ export default {
         }
     },
     methods: {
-        clientReady() {
-            // this.client.moves.shuffleDeck()
-            // this.client.moves.drawCards({ count: 5 })
-            // this.client.events.endTurn()
-            // this.client.moves.drawCards({ count: 5 })
-            // this.client.events.endTurn()
-        },
         onAsk(rank, askerIndex) {
             const otherPlayerIndex = askerIndex == 0 ? 1 : 0
             this.client.moves.askForCard({
