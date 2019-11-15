@@ -7,6 +7,10 @@
                 :hand="hand"
                 @ask="onAsk($event, i)"
             />
+
+            <div class="summary" v-if="ctx.gameover">
+                {{ ctx.gameover }}
+            </div>
         </div>
     </section>
 </template>
