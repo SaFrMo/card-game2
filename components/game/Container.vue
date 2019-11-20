@@ -17,7 +17,11 @@
 
         <div class="summary" v-if="ctx.gameover">
             <p>{{ winner.name }} wins! Score: {{ winner.score }}</p>
-            <p><button @click="client.reset">Play Again</button></p>
+
+            <p>
+                <span v-if="options.multiplayer">Reload to play again.</span>
+                <button v-else @click="client.reset">Play Again</button>
+            </p>
         </div>
     </section>
 </template>
