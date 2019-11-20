@@ -1,5 +1,11 @@
 <template>
-    <section class="game-container" v-if="G">
+    <section
+        :class="[
+            'game-container',
+            { 'is-active': playerID == ctx.currentPlayer }
+        ]"
+        v-if="G"
+    >
         <div class="hand-wrap">
             <span>Player {{ playerID }}</span>
             <game-hand
@@ -31,12 +37,13 @@ export default {
     },
     methods: {
         beforeClientInit() {
-            this.options.debug = this.playerID == 0
+            this.options.debug = this.playerID == '0'
             this.options.playerID = this.playerID
         },
         onAsk(rank) {
-            const otherPlayerIndex = this.playerID == 0 ? 1 : 0
-            this.client.moves.askForCard(this.G, this.ctx, {
+            const otherPlayerIndex = this.playerID == '0' ? '1' : '0'
+
+            this.client.moves.askForCard({
                 rank,
                 otherPlayerIndex,
                 askerIndex: this.playerID
@@ -63,6 +70,9 @@ export default {
     .hand-wrap {
         display: flex;
         justify-content: space-between;
+    }
+    &:not(.is-active) {
+        opacity: 0.3;
     }
 }
 </style>

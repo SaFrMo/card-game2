@@ -31,13 +31,27 @@ export default {
     },
     computed: {
         G() {
-            if (!this.client) return null
+            if (
+                !this.client ||
+                !this.client.store ||
+                !this.client.store.getState()
+            ) {
+                return null
+            }
+
             // TODO: find better way to react to client state changes
             const c = this.client.log
             return this.client.store.getState().G
         },
         ctx() {
-            if (!this.client) return null
+            if (
+                !this.client ||
+                !this.client.store ||
+                !this.client.store.getState()
+            ) {
+                return null
+            }
+
             // TODO: find better way to react to client state changes
             const c = this.client.log
             return this.client.store.getState().ctx

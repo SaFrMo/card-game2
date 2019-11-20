@@ -1,6 +1,10 @@
 <template>
     <main :class="['home']">
-        <game-container v-for="(player, i) in players" :key="i" :playerID="i" />
+        <game-container
+            v-for="(player, i) in players"
+            :key="i"
+            :playerID="i.toString()"
+        />
     </main>
 </template>
 
