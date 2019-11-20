@@ -1,11 +1,10 @@
 <template>
     <section class="game-container" v-if="G">
         <div class="hand-wrap">
+            <span>Player {{ playerID }}</span>
             <game-hand
-                v-for="(hand, i) in G.hands"
-                :key="i"
-                :hand="hand"
-                @ask="onAsk($event, i)"
+                :hand="G.hands[playerID]"
+                @ask="onAsk($event)"
                 @pass="onPass"
             />
         </div>
@@ -31,12 +30,16 @@ export default {
         }
     },
     methods: {
-        onAsk(rank, askerIndex) {
-            const otherPlayerIndex = askerIndex == 0 ? 1 : 0
-            this.client.moves.askForCard({
+        beforeClientInit() {
+            this.options.debug = this.playerID == 0
+            this.options.playerID = this.playerID
+        },
+        onAsk(rank) {
+            const otherPlayerIndex = this.playerID == 0 ? 1 : 0
+            this.client.moves.askForCard(this.G, this.ctx, {
                 rank,
                 otherPlayerIndex,
-                askerIndex
+                askerIndex: this.playerID
             })
         },
         onPass() {

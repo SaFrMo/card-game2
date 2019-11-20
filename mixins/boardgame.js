@@ -1,10 +1,14 @@
 import { Client } from 'boardgame.io/client'
 
 export default {
+    props: {
+        playerID: { default: '' }
+    },
     data() {
         return {
             client: null,
-            options: null
+            options: null,
+            setupClient: true
         }
     },
     mounted() {
@@ -14,11 +18,16 @@ export default {
     },
     methods: {
         initClient() {
-            this.client = new Client(this.options)
-            this.client.start()
-            this.clientReady()
+            this.beforeClientInit()
+
+            if (this.setupClient) {
+                this.client = new Client(this.options)
+                this.client.start()
+                this.onClientReady()
+            }
         },
-        clientReady() {}
+        beforeClientInit() {},
+        onClientReady() {}
     },
     computed: {
         G() {
